@@ -1,7 +1,5 @@
-# Enumerable module
 module Enumerable
   def my_each
-    # don't modify my_each unless block_given
     return to_enum(:my_each) unless block_given?
 
     arr = self if instance_of?(Array)
@@ -17,7 +15,6 @@ module Enumerable
   end
 
   def my_each_with_index
-    # don't modify my_each_with_index unless block_given
     return to_enum(:my_each_with_index) unless block_given?
 
     arr = self if instance_of?(Array)
@@ -102,19 +99,16 @@ module Enumerable
     return arr.length unless block_given? || num
 
     return arr.my_select { |item| item == num }.length
-    arr.my_select { |item| yield(item) }.length if num
+    if num
+    arr.my_select { |item| yield(item) }.length
   end
 
   def my_map(par_ = nil)
     new_arr = []
     if par_
-      each do |i|
-        new_arr << par_.call(i)
-      end
+      each { |i| new_arr << par_.call(i) }
     else
-      each do |i|
-        new_arr << yield(i)
-      end
+      each { |i| new_arr << yield(i) }
       new_arr
     end
   end
@@ -134,13 +128,12 @@ module Enumerable
     end
   end
 end
-# Test Methods In All Cases
 
 puts 'my_each if type Array'
 puts [1, 2, 3, 4].my_each(&:even?)
 
 puts 'my_each if type Range'
-puts (0..5).my_each(&:even?)
+puts(0..5).my_each(&:even?)
 
 puts 'my_each_with_index if type Array'
 [5, 6, 7, 8].my_each_with_index do |i, index|
