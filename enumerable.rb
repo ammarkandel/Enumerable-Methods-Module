@@ -1,6 +1,6 @@
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
+rubocop:disable Metrics/ModuleLength
+rubocop:disable Metrics/CyclomaticComplexity
+rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -78,7 +78,7 @@ module Enumerable
     if block_given?
       my_each { |num| return false if yield(num) }
     elsif param.empty?
-      my_each { |num| return false unless num.nil? || num == false}
+      my_each { |num| return false unless num.nil? || num == false }
     elsif param[0].is_a? Regexp
       my_each { |num| return false if param[0].match(num) }
     else
@@ -132,9 +132,9 @@ module Enumerable
     end
   end
 end
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
+rubocop:disable Metrics/ModuleLength
+rubocop:disable Metrics/CyclomaticComplexity
+rubocop:disable Metrics/PerceivedComplexity
 def multiply_els(array)
   array.my_inject(:*)
 end
