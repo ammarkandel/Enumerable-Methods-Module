@@ -96,6 +96,31 @@ module Enumerable
     my_any? { |it| return false if yield(it) }
     true
   end
+
+  def my_count(par_=nil, *others)
+    my_string = self.is_a? String 
+    count = 0
+    if others.join(',').length >= 1
+      return 0
+    elsif par_ == nil and my_string
+      my_arr = self.split("") 
+      my_arr.length.times do
+        count += 1
+      end
+      return count
+    elsif par_ != nil and my_string
+      my_arr = self.split("") 
+      for i in my_arr do
+        if i == par_[0]
+          count += 1
+        end
+      end
+      return count
+    else 
+      return 0
+    end
+
+  end
 end
 
 # Test Methods In All Cases
