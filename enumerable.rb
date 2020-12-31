@@ -97,26 +97,12 @@ module Enumerable
     true
   end
 
-  def my_count(par_ = nil, *others)
-    my_string = is_a?(String)
-    counter = 0
-    if others.join(',').length >= 1
-      0
-    elsif par_.nil? && my_string
-      my_arr = split('')
-      my_arr.length.times do
-        counter += 1
-      end
-      count
-    elsif !par_.nil? && my_string
-      my_arr = split('')
-      my_arr.each do |i|
-        counter += 1 if i == par_[0]
-      end
-      counter
-    else
-      0
-    end
+  def my_count(num = nil)
+    arr = instance_of?(Array) ? self : to_a
+    return arr.length unless block_given? || num
+
+    return arr.my_select { |item| item == num }.length
+    arr.my_select { |item| yield(item) }.length if num
   end
 
   def my_map(par_ = nil)
@@ -148,7 +134,6 @@ module Enumerable
     end
   end
 end
-
 # Test Methods In All Cases
 
 puts 'my_each if type Array'
@@ -179,11 +164,11 @@ puts [1, 3, 5, 7].my_all?(&:even?)
 puts 'check if none of my'
 puts [1, 3, 5, 8].my_none?(&:even?)
 
-num = 'mmmmmnn'.my_count('n')
+num = %w[a s f r].count('n')
 puts num
 
-num1 = 'mmmmmnn'.count('n')
-puts num1
+num = %w[a s f r].my_count('n')
+puts num
 
 p([1, 2, 3, 4].map { |i| i * i })
 p([1, 2, 3, 4].my_map { |i| i * i })
