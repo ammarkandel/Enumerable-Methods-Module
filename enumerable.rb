@@ -1,6 +1,6 @@
-#rubocop:disable metrics/ModuleLength
-#rubocop:disable metrics/CyclomaticComplexity
-#rubocop:disable metrics/PerceivedComplexity
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -132,9 +132,9 @@ module Enumerable
     end
   end
 end
-#rubocop:disable metrics/ModuleLength
-#rubocop:disable metrics/CyclomaticComplexity
-#rubocop:disable metrics/PerceivedComplexity
+# rubocop:disable Metrics/ModuleLength
+# rubocop:disable Metrics/CyclomaticComplexity
+# rubocop:disable Metrics/PerceivedComplexity
 def multiply_els(array)
   array.my_inject(:*)
 end
