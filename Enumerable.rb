@@ -119,7 +119,6 @@ module Enumerable
     else 
       return 0
     end
-
   end
 
   def my_map(par_=nil)
@@ -147,11 +146,12 @@ module Enumerable
       acc
     elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
       acc = number
-      my_each { |i| acc = acc.nil? ? item : acc.send(sym, i) }
+      my_each { |i| acc = acc.nil? ? i : acc.send(sym, i) }
     end
   end
   
 end
+
 
 # Test Methods In All Cases
 
@@ -182,3 +182,26 @@ puts [1, 3, 5, 7].my_all?(&:even?)
 
 puts 'check if none of my'
 puts [1, 3, 5, 8].my_none?(&:even?)
+
+
+num = "mmmmmnn".my_count("n")
+puts num
+
+num1 = "mmmmmnn".count("n")
+puts num1
+
+p([1, 2, 3, 4].map{|i| i * i})
+p([1, 2, 3, 4].my_map{|i| i * i})
+
+p((0..5).map{|i| i * i})
+p((0..5).my_map{|i| i * i})
+
+my_proc = proc { |i| i * i}
+p([0, 1, 2, 3, 4].map(&my_proc))
+p([0, 1, 2, 3, 4].my_map(&my_proc))
+
+p ((5..10).inject { |x, y| x + y })
+p [5, 5, 7, 8].inject(1) { |x, y| x * y }
+
+p ((5..10).inject { |x, y| x + y })
+p [5, 5, 7, 8].inject(1) { |x, y| x * y }
