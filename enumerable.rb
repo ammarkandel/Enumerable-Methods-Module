@@ -98,8 +98,7 @@ module Enumerable
     arr = instance_of?(Array) ? self : to_a
     return arr.length unless block_given? || num
 
-    return arr.my_select { |item| item == num }.length
-    if num
+    return arr.my_select { |item| item == num }.length if num
     
     arr.my_select { |item| yield(item) }.length
   end
@@ -126,6 +125,8 @@ def my_inject(number = nil, _syn = nil)
   elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
     acc = number
     my_each { |i| acc = acc.nil? ? i : acc.send(sym, i) }
+  else
+    acc
   end
 end
 
@@ -167,18 +168,19 @@ puts num
 num = %w[a s f r].my_count('n')
 puts num
 
-p([1, 2, 3, 4].map { |i| i * i })
-p([1, 2, 3, 4].my_map { |i| i * i })
+p [1, 2, 3, 4].map { |i| i * i }
+p [1, 2, 3, 4].my_map { |i| i * i }
 
-p((0..5).map { |i| i * i })
-p((0..5).my_map { |i| i * i })
+p (0..5).map { |i| i * i }
+p (0..5).my_map { |i| i * i }
 
 my_proc = proc { |i| i * i }
-p([0, 1, 2, 3, 4].map(&my_proc))
-p([0, 1, 2, 3, 4].my_map(&my_proc))
+p [0, 1, 2, 3, 4].map(&my_proc)
+p [0, 1, 2, 3, 4].my_map(&my_proc)
 
-p((5..10).my_inject { |x, y| x + y })
+p (5..10).my_inject { |x, y| x + y }
 p [5, 5, 7, 8].my_inject(1) { |x, y| x * y }
 
 puts 'multiply_els'
 p multiply_els([4, 5, 8, 9])
+end
