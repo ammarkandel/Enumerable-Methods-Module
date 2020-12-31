@@ -135,6 +135,21 @@ module Enumerable
     new_arr
     end
   end
+
+  def my_inject(number = nil, syn = nil)
+    if block_given?
+      acc = number
+      my_each { |i| acc = acc.nil? ? i : yield(acc, i) }
+      acc
+    elsif !number.nil? && (number.is_a?(Symbol) || number.is_a?(String))
+      acc = nil 
+      my_each { |i| acc = acc.nil? ? i : acc.send(number, i) }
+      acc
+    elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
+      acc = number
+      my_each { |i| acc = acc.nil? ? item : acc.send(sym, i) }
+    end
+  end
   
 end
 
