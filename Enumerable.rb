@@ -121,6 +121,21 @@ module Enumerable
     end
 
   end
+
+  def my_map(par_=nil)
+    new_arr = []
+    if par_
+      each do |i| 
+        new_arr << par_.call(i) 
+      end
+    else
+      each do |i| 
+        new_arr << yield(i) 
+      end
+    new_arr
+    end
+  end
+  
 end
 
 # Test Methods In All Cases
