@@ -130,15 +130,11 @@ module Enumerable
     end
   end
 
-  def multiply_els(arr)
-    arr.my_inject { |result, element| result * element }
-  end
-
   puts 'my_each if type Array'
   puts [1, 2, 3, 4].my_each(&:even?)
 
   puts 'my_each if type Range'
-  puts(0..5).my_each(&:even?)
+  puts (0..5).my_each(&:even?)
 
   puts 'my_each_with_index if type Array'
   [5, 6, 7, 8].my_each_with_index do |i, index|
@@ -180,7 +176,4 @@ module Enumerable
 
   p((5..10).my_inject { |x, y| x + y })
   p([5, 5, 7, 8].my_inject(1) { |x, y| x * y })
-
-  puts 'multiply_els'
-  p multiply_els([4, 5, 8, 9])
 end
