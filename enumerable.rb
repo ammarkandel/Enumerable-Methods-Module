@@ -1,35 +1,20 @@
-# rubocop:disable Metrics/ModuleLength
 # rubocop:disable Metrics/CyclomaticComplexity
 # rubocop:disable Metrics/PerceivedComplexity
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
+    return to_enum unless block_given?
 
-    arr = self if instance_of?(Array)
-    arr = to_a if instance_of?(Range)
-    arr = flatten if instance_of?(Hash)
-
-    count = 0
-    while count < arr.length
-      yield(arr[count])
-      count += 1
-    end
-    arr
+    array = to_a
+    array.length.times { |element| yield(array[element]) }
+    self
   end
 
   def my_each_with_index
-    return to_enum(:my_each_with_index) unless block_given?
+    return to_enum unless block_given?
 
-    arr = self if instance_of?(Array)
-    arr = to_a if instance_of?(Range)
-    arr = flatten if instance_of?(Hash)
-
-    count = 0
-    while count < arr.length
-      yield(arr[count], count)
-      count += 1
-    end
-    arr
+    array = to_a
+    array.length.times { |element| yield(array[element], element) }
+    self
   end
 
   def my_select
@@ -40,36 +25,39 @@ module Enumerable
     new_arr
   end
 
-  def my_all?(param = nil)
+  def my_all?(*_arg)
+    return "`my_all?': wrong # of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
+
     if block_given?
-      my_each { |item| return false if yield(item) == false }
-      return true
-    elsif param.nil?
-      my_each { |num| return false if num.nil? || num == false }
-    elsif !param.nil? && (param.is_a? Class)
-      my_each { |num| return false if num.class != param }
-    elsif !param.nil? && param.instance_of?(Regexp)
-      my_each { |_num| return false unless arg.match(n) }
+      my_each { |element| return false unless yield(element) }
+    elsif _arg[0].is_a? Class
+      my_each { |element| return false unless element.class.ancestors.include?(_arg[0]) }
+    elsif _arg[0].is_a? Regexp
+      my_each { |element| return false unless _arg[0].match(element) }
+    elsif _arg.empty?
+      return include?(nil) || include?(false) ? false : true
     else
-      my_each { |_num| return false if n != param }
+      my_each { |element| return false unless element == _arg[0] }
     end
     true
   end
 
-  def my_any?(param = nil)
+  def my_any?(*_arg)
+    return "`my_any?': wrong number of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
+
     if block_given?
-      my_each { |item| return true if yield(item) }
-      return true
-    elsif param.nil?
-      my_each { |num| return true if num.nil? || num == true }
-    elsif !param.nil? && (param.is_a? Class)
-      my_each { |num| return true if num.instance_of?(param) }
-    elsif !param.nil? && param.instance_of?(Regexp)
-      my_each { |_num| return true unless arg.match(num) }
+      my_each { |element| return true if yield(element) }
+    elsif _arg.empty?
+      my_each { |element| return true if element }
+      false
+    elsif _arg[0].is_a? Class
+      my_each { |element| return true if element.class.ancestors.include?(_arg[0]) }
+    elsif _arg[0].is_a? Regexp
+      my_each { |element| return true if _arg[0].match(element) }
     else
-      my_each { |_num| return true if num != param }
+      my_each { |element| return true if element == _arg[0] }
     end
-    true
+    false
   end
 
   def my_none?(*param)
@@ -132,7 +120,7 @@ module Enumerable
     end
   end
 end
-# rubocop:enable Metrics/ModuleLength
+
 # rubocop:enable Metrics/CyclomaticComplexity
 # rubocop:enable Metrics/PerceivedComplexity
 def multiply_els(array)
