@@ -25,37 +25,37 @@ module Enumerable
     new_arr
   end
 
-  def my_all?(*_arg)
+  def my_all?(*arg)
     return "`my_all?': wrong # of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
 
     if block_given?
       my_each { |element| return false unless yield(element) }
-    elsif _arg[0].is_a? Class
-      my_each { |element| return false unless element.class.ancestors.include?(_arg[0]) }
-    elsif _arg[0].is_a? Regexp
-      my_each { |element| return false unless _arg[0].match(element) }
-    elsif _arg.empty?
+    elsif arg[0].is_a? Class
+      my_each { |element| return false unless element.class.ancestors.include?(arg[0]) }
+    elsif arg[0].is_a? Regexp
+      my_each { |element| return false unless arg[0].match(element) }
+    elsif arg.empty?
       return include?(nil) || include?(false) ? false : true
     else
-      my_each { |element| return false unless element == _arg[0] }
+      my_each { |element| return false unless element == arg[0] }
     end
     true
   end
 
-  def my_any?(*_arg)
+  def my_any?(*arg)
     return "`my_any?': wrong number of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
 
     if block_given?
       my_each { |element| return true if yield(element) }
-    elsif _arg.empty?
+    elsif arg.empty?
       my_each { |element| return true if element }
       false
-    elsif _arg[0].is_a? Class
-      my_each { |element| return true if element.class.ancestors.include?(_arg[0]) }
-    elsif _arg[0].is_a? Regexp
-      my_each { |element| return true if _arg[0].match(element) }
+    elsif arg[0].is_a? Class
+      my_each { |element| return true if element.class.ancestors.include?(arg[0]) }
+    elsif arg[0].is_a? Regexp
+      my_each { |element| return true if arg[0].match(element) }
     else
-      my_each { |element| return true if element == _arg[0] }
+      my_each { |element| return true if element == arg[0] }
     end
     false
   end
