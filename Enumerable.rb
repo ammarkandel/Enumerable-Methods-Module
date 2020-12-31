@@ -98,22 +98,22 @@ module Enumerable
   end
 
   def my_count(par_ = nil, *others)
-    my_string = is_a? String
-    count = 0
+    my_string = is_a?(String)
+    counter = 0
     if others.join(',').length >= 1
       0
     elsif par_.nil? && my_string
       my_arr = split('')
       my_arr.length.times do
-        count += 1
+        counter += 1
       end
       count
     elsif !par_.nil? && my_string
       my_arr = split('')
       my_arr.each do |i|
-        count += 1 if i == par_[0]
+        counter += 1 if i == par_[0]
       end
-      count
+      counter
     else
       0
     end
