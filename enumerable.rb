@@ -132,9 +132,9 @@ module Enumerable
     end
   end
 end
-# rubocop:disable Metrics/ModuleLength
-# rubocop:disable Metrics/CyclomaticComplexity
-# rubocop:disable Metrics/PerceivedComplexity
+# rubocop:enable Metrics/ModuleLength
+# rubocop:enable Metrics/CyclomaticComplexity
+# rubocop:enable Metrics/PerceivedComplexity
 def multiply_els(array)
   array.my_inject(:*)
 end
