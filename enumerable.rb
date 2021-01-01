@@ -97,7 +97,7 @@ module Enumerable
   end
 
   def my_inject(acc = nil, opp = nil)
-    return raise LocalJumpError, "Expecting a block or any argument" if !block_given? && acc.nil? && opp.nil?
+    return raise LocalJumpError, 'Expecting a block or any argument' if !block_given? && acc.nil? && opp.nil?
 
     if !block_given?
       if opp.nil?
