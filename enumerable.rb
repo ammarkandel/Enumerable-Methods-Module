@@ -98,7 +98,7 @@ module Enumerable
 
   def my_inject(acc = nil, opp = nil)
     if !block_given?
-      if syn.nil?
+      if opp.nil?
         opp = acc
         acc = nil
       end
