@@ -10,7 +10,7 @@ Custom implementation of ruby methods: (each, select, all?, any?, none?, count?,
 
 git clone git@github.com:ammarkandel/Enumerable-Methods-Module.git
 
-cd Enumerable-Methods-Module.rb
+cd Enumerable-Methods-Module
 
 Type `ruby Enumerable-Methods-Module.rb` in terminal
 
