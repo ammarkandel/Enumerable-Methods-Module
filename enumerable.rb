@@ -96,20 +96,19 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(acc = nil, op = nil)
+  def my_inject(acc = nil, opp = nil)
     if !block_given?
       if syn.nil?
-        op = acc
+        opp = acc
         acc = nil
       end
-      op.to_sym
-      my_each { |i| acc = acc.nil? ? i : acc.send(op, i) }
+      opp.to_sym
+      my_each { |i| acc = acc.nil? ? i : acc.send(opp, i) }
     else
       my_each { |i| acc = acc.nil? ? i : yield(acc, i) }
     end
     acc
   end
-  
 end
 
 # rubocop:enable Metrics/CyclomaticComplexity
