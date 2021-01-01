@@ -96,29 +96,20 @@ module Enumerable
     new_arr
   end
 
-  def my_inject(number = nil, syn = nil)
-    if block_given?
-      acc = number
-      my_each { |i| acc = acc.nil? ? i : yield(acc, i) }
-      raise LocalJumperError unless block_given? || !syn.empty? || !number.empty?
-
-      acc
-    elsif !number.nil? && (number.is_a?(Symbol) || number.is_a?(String))
-      raise LocalJumperError unless block_given? || !number.empty?
-
-      acc = nil
-      my_each { |i| acc = acc.nil? ? i : acc.send(number, i) }
-      acc
-    elsif !syn.nil? && (syn.is_a?(Symbol) || syn.is_a?(String))
-      raise LocalJumperError unless block_given? || !syn.empty?
-
-      acc = number
-      my_each { |i| acc = acc.nil? ? i : acc.send(syn, i) }
-      acc
+  def my_inject(acc = nil, op = nil)
+    if !block_given?
+      if syn.nil?
+        op = acc
+        acc = nil
+      end
+      op.to_sym
+      my_each { |i| acc = acc.nil? ? i : acc.send(op, i) }
     else
-      raise LocalJumperError
+      my_each { |i| acc = acc.nil? ? i : yield(acc, i) }
     end
+    acc
   end
+  
 end
 
 # rubocop:enable Metrics/CyclomaticComplexity
