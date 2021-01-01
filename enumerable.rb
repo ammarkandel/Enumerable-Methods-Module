@@ -26,7 +26,7 @@ module Enumerable
   end
 
   def my_all?(*arg)
-    return "`my_all?': wrong # of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
+    return "`my_all?': wrong # of arg (given #{arg.length}, expected 0..1)" if arg.length > 1
 
     if block_given?
       my_each { |element| return false unless yield(element) }
@@ -43,7 +43,7 @@ module Enumerable
   end
 
   def my_any?(*arg)
-    return "`my_any?': wrong number of arguments (given #{arguments.length}, expected 0..1)" if arguments.length > 1
+    return "`my_any?': wrong number of arg (given #{arg.length}, expected 0..1)" if arg.length > 1
 
     if block_given?
       my_each { |element| return true if yield(element) }
@@ -61,7 +61,7 @@ module Enumerable
   end
 
   def my_none?(*param)
-    return "`my_none': wrong arguments(given #{arguments.length}, expected 0..1)" if arguments.length > 1
+    return "`my_none': wrong arguments(given #{param.length}, expected 0..1)" if param.length > 1
 
     if block_given?
       my_each { |num| return false if yield(num) }
