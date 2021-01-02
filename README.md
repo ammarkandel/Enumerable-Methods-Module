@@ -1,6 +1,15 @@
 # Enumerable-Methods-Module
 
-Custom implementation of ruby methods: (each, select, all?, any?, none?, count?, map and inject )
+Custom implementation of ruby methods:
+
+- each
+- select
+- all?
+- any?
+- none?
+- count?
+- map
+- inject
 
 ## Built With
 
