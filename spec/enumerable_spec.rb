@@ -17,7 +17,7 @@ describe Enumerable do
       expect(test_arr_two.my_each).to be_an(Enumerator)
     end
 
-    it 'expect my each to not eql range from 1 to 9' do
+    it 'expect my each to not eql range from 15 to 20' do
       expect(range.my_each { |i| i }).not_to eql((15..20))
     end
   end
