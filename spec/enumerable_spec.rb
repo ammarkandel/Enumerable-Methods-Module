@@ -1,4 +1,4 @@
-require '../lib/enumerable'
+require './lib/enumerable'
 
 describe Enumerable do
   let(:range) { (1..9) }
