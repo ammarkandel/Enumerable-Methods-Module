@@ -24,7 +24,7 @@ describe Enumerable do
     end
 
     it 'expect my each to eql selected items' do
-      expect(test_arr_two.my_select(&:even?)).to eql(test_arr_two.my_select { |i| i.even? })
+      expect(test_arr_two.my_select(&:even?)).to eql(test_arr_two.my_select(&:even?))
     end
   end
 
